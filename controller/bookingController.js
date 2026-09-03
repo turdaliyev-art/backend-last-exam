@@ -1,4 +1,4 @@
-const { Booking, CartItem, PaymentMethod, Discount, DeliveryMethod, TicketStatus } = require("../models");
+const { Booking, Cart, PaymentMethod, Discount, DeliveryMethod, TicketStatus } = require("../models");
 const { validateBooking, validateBookingUpdate } = require("../validation/bookingValidation");
 const { Op } = require("sequelize");
 
@@ -18,7 +18,7 @@ exports.getBookings = async (req, res) => {
     try {
         const bookings = await Booking.findAll({
             include: [
-                { model: CartItem, as: "cart" },
+                { model: Cart, as: "cart" },
                 { model: PaymentMethod, as: "payment_method" },
                 { model: Discount, as: "discount" },
                 { model: DeliveryMethod, as: "delivery_method" },
@@ -35,7 +35,7 @@ exports.getBookingById = async (req, res) => {
     try {
         const booking = await Booking.findByPk(req.params.id, {
             include: [
-                { model: CartItem, as: "cart" },
+                { model: Cart, as: "cart" },
                 { model: PaymentMethod, as: "payment_method" },
                 { model: Discount, as: "discount" },
                 { model: DeliveryMethod, as: "delivery_method" },

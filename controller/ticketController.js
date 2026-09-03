@@ -1,4 +1,4 @@
-const { Ticket, Event, TicketStatus, CartItem } = require("../models");
+const { Ticket, Event, TicketStatus, CartItem, Seat, TicketType } = require("../models");
 const { validateTicket, validateTicketUpdate } = require("../validation/ticketValidation");
 const { Op } = require("sequelize");
 
@@ -20,7 +20,9 @@ exports.getTickets = async (req, res) => {
             include: [
                 { model: Event, as: "event" },
                 { model: TicketStatus, as: "status" },
-                { model: CartItem, as: "cart_items" }
+                { model: CartItem, as: "cart_items" },
+                { model: Seat, as: "seat" },
+                { model: TicketType, as: "ticket_type" }
             ]
         });
         res.status(200).send(tickets);
@@ -35,7 +37,9 @@ exports.getTicketById = async (req, res) => {
             include: [
                 { model: Event, as: "event" },
                 { model: TicketStatus, as: "status" },
-                { model: CartItem, as: "cart_items" }
+                { model: CartItem, as: "cart_items" },
+                { model: Seat, as: "seat" },
+                { model: TicketType, as: "ticket_type" }
             ]
         });
         if (!ticket) return res.status(404).send("ticket not found");

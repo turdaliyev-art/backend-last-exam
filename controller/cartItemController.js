@@ -1,4 +1,4 @@
-const { CartItem, Booking, Ticket } = require("../models");
+const { CartItem, Booking, Ticket, Cart } = require("../models");
 const { validateCartItem, validateCartItemUpdate } = require("../validation/cartItemValidation");
 const { Op } = require("sequelize");
 
@@ -19,7 +19,8 @@ exports.getCartItems = async (req, res) => {
         const cartItems = await CartItem.findAll({
             include: [
                 { model: Booking, as: "bookings" },
-                { model: Ticket, as: "ticket" }
+                { model: Ticket, as: "ticket" },
+                { model: Cart, as: "cart" }
             ]
         });
         res.status(200).send(cartItems);
@@ -33,7 +34,8 @@ exports.getCartItemById = async (req, res) => {
         const cartItem = await CartItem.findByPk(req.params.id, {
             include: [
                 { model: Booking, as: "bookings" },
-                { model: Ticket, as: "ticket" }
+                { model: Ticket, as: "ticket" },
+                { model: Cart, as: "cart" }
             ]
         });
         if (!cartItem) return res.status(404).send("cart item not found");

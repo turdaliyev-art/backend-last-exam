@@ -1,4 +1,4 @@
-const { Cart, Customer, CartItem, TicketStatus } = require("../models");
+const { Cart, Customer, CartItem, Booking, TicketStatus } = require("../models");
 const { validateCart, validateCartUpdate } = require("../validation/cartValidation");
 const { Op } = require("sequelize");
 
@@ -20,6 +20,7 @@ exports.getCarts = async (req, res) => {
             include: [
                 { model: Customer, as: "customer" },
                 { model: CartItem, as: "cart_items" },
+                { model: Booking, as: "bookings" },
                 { model: TicketStatus, as: "status" }
             ]
         });
@@ -35,6 +36,7 @@ exports.getCartById = async (req, res) => {
             include: [
                 { model: Customer, as: "customer" },
                 { model: CartItem, as: "cart_items" },
+                { model: Booking, as: "bookings" },
                 { model: TicketStatus, as: "status" }
             ]
         });

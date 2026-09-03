@@ -68,6 +68,14 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "human_category_id",
             as: "human_category",
         });
+        Event.belongsTo(models.Venue, {
+            foreignKey: "venue_id",
+            as: "venue",
+        });
+        Event.belongsTo(models.Lang, {
+            foreignKey: "lang_id",
+            as: "lang",
+        });
     };
 
     return Event;

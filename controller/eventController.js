@@ -1,4 +1,4 @@
-const { Event, Ticket, EventType, HumanCategory } = require("../models");
+const { Event, Ticket, EventType, HumanCategory, Venue, Lang } = require("../models");
 const { validateEvent, validateEventUpdate } = require("../validation/eventValidation");
 const { Op } = require("sequelize");
 
@@ -20,7 +20,9 @@ exports.getEvents = async (req, res) => {
             include: [
                 { model: Ticket, as: "tickets" },
                 { model: EventType, as: "event_type" },
-                { model: HumanCategory, as: "human_category" }
+                { model: HumanCategory, as: "human_category" },
+                { model: Venue, as: "venue" },
+                { model: Lang, as: "lang" }
             ]
         });
         res.status(200).send(events);
@@ -35,7 +37,9 @@ exports.getEventById = async (req, res) => {
             include: [
                 { model: Ticket, as: "tickets" },
                 { model: EventType, as: "event_type" },
-                { model: HumanCategory, as: "human_category" }
+                { model: HumanCategory, as: "human_category" },
+                { model: Venue, as: "venue" },
+                { model: Lang, as: "lang" }
             ]
         });
         if (!event) return res.status(404).send("event not found");

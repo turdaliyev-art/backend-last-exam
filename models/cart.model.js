@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "cart_id",
             as: "cart_items",
         });
+        Cart.hasMany(models.Booking, {
+            foreignKey: "cart_id",
+            as: "bookings",
+        });
         Cart.belongsTo(models.TicketStatus, {
             foreignKey: "status_id",
             as: "status",

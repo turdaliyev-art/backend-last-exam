@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Booking.associate = (models) => {
-        Booking.belongsTo(models.CartItem, {
+        Booking.belongsTo(models.Cart, {
             foreignKey: "cart_id",
             as: "cart",
         })

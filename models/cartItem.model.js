@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     CartItem.associate = (models) => {
-        CartItem.hasMany(models.Booking, {
-            foreignKey: "cart_id",
-            as: "bookings",
-        });
         CartItem.belongsTo(models.Ticket, {
             foreignKey: "ticket_id",
             as: "ticket",
+        });
+        CartItem.belongsTo(models.Cart, {
+            foreignKey: "cart_id",
+            as: "cart",
         });
     };
 
