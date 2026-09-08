@@ -1,9 +1,9 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const sequelize = require("./config/database");
+const { sequelize } = require("./models");
 const setupSwagger = require("./swagger/swagger");
-require("./models");
+
 
 const adminRoutes = require("./routes/adminRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
@@ -41,7 +41,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({ origin: "*" }));
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 setupSwagger(app);
